@@ -22,7 +22,7 @@
                     aria-describedby="titleHelper" placeholder="Scrivi titolo" value="{{ old('title') }}" />
                 <small id="titleHelper" class="form-text text-muted">Scrivi un titolo</small>
                 @error('title')
-                    <div class="text-danger py-2">
+                    <div class="text-danger pt-2">
                         {{ $message }}
                     </div>
                 @enderror
@@ -46,7 +46,7 @@
                 <input type="text" class="form-control @error('project') is-invalid @enderror" name="project"
                     id="project" aria-describedby="projectHelper" placeholder="Inserisci link progetto" />
                 <small id="projectHelper" class="form-text text-muted">Type a Link for this project</small>
-                @error('project')
+                @error('projects')
                     <div class="text-danger py-2">
                         {{ $message }}
                     </div>
@@ -62,6 +62,11 @@
                             {{ $type->name }}</option>
                     @endforeach
                 </select>
+                @error('type')
+                    <div class="text-danger py-1">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             <div class="mb-3">
@@ -69,13 +74,20 @@
                 <div class=" d-flex gap-4 ">
                     @foreach ($technologies as $technology)
                         <div class="form-check form-switch">
-                            <input name="technologies[]" class="form-check-input " type="checkbox" role="switch"  value="{{$technology->id}}"
-                                id="technology-{{ $technology->id }}" {{in_array($technology->id, old('technologies',[])) ? 'checked' : ''}}/>
-                            <label class="form-check-label" for="technology-{{ $technology->id }}"> {{ $technology->name }}
+                            <input name="technologies[]" class="form-check-input " type="checkbox" role="switch"
+                                value="{{ $technology->id }}" id="technology-{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} />
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                {{ $technology->name }}
                             </label>
                         </div>
                     @endforeach
                 </div>
+                @error('technologies')
+                    <div class="text-danger py-1">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
 
