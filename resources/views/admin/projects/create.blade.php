@@ -55,18 +55,30 @@
 
             <div class="mb-3">
                 <label for="type_id" class="form-label">Type</label>
-                <select
-                    class="form-select"
-                    name="type_id"
-                    id="type_id"
-                >
+                <select class="form-select" name="type_id" id="type_id">
                     <option selected>Select a Type of Project</option>
                     @foreach ($types as $type)
-                    <option value="{{$type->id}}" {{$type->id == old('type_id') ? 'selected' : ''}}>{{$type->name}}</option>
+                        <option value="{{ $type->id }}" {{ $type->id == old('type_id') ? 'selected' : '' }}>
+                            {{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
-            
+
+            <div class="mb-3">
+                <label for="" class="form-label">Technology</label>
+                <div class=" d-flex gap-4 ">
+                    @foreach ($technologies as $technology)
+                        <div class="form-check form-switch">
+                            <input name="technologies[]" class="form-check-input " type="checkbox" role="switch"  value="{{$technology->id}}"
+                                id="technology-{{ $technology->id }}" {{in_array($technology->id, old('technologies',[])) ? 'checked' : ''}}/>
+                            <label class="form-check-label" for="technology-{{ $technology->id }}"> {{ $technology->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+
 
 
             <div class="mb-3">
