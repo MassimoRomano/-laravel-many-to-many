@@ -21,7 +21,16 @@
                     </a>
                     <p class="text-light py-5">{{ $project->description }}</p>
                     <div class="metadata">
-                        <strong class="text-danger">Type:</strong> <span class="text-light">{{$project->type ? $project->type->name : 'Nessun Tipo'}}</span>
+                        <strong class="text-danger">Type:</strong> <span
+                            class="text-light">{{ $project->type ? $project->type->name : 'Nessun Tipo' }}</span>
+                    </div>
+                    <div class="metadata">
+                        <strong class="text-danger">Technology:</strong> 
+                        <span class="text-light text-uppercase">
+                            @foreach ($project->technologies as $technology)
+                                {{ $technology->name }}
+                            @endforeach
+                        </span>
                     </div>
                 </div>
             </div>

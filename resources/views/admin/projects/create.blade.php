@@ -90,9 +90,6 @@
                 @enderror
             </div>
 
-
-
-
             <div class="mb-3">
                 <label for="content" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"

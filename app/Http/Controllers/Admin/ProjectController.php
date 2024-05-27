@@ -46,7 +46,12 @@ class ProjectController extends Controller
             $validated['image'] = $image_path;
         }
 
-        Project::create($validated);
+        $project = Project::create($validated);
+
+        if($request->has('technologies')){
+            $project->technologies()->attach($validated['technologies']);
+        }
+
         return to_route('admin.projects.index');
     }
 
@@ -64,7 +69,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project','types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project','types','technologies'));
     }
 
     /**
@@ -85,7 +91,12 @@ class ProjectController extends Controller
             }
         }
 
+        if ($request->has('technologies')) {
+            $validated['technologies'] = $request->technologies;
+        }
+
         $project->update($validated);
+        $project->technologies()->sync($validated['technologies']);
         return to_route('admin.projects.index')->with('message', "Post $project->title fix successfully");
     }
 
